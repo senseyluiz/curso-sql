@@ -1,9 +1,8 @@
-SELECT
-    DATE(DtCriacao) AS DataCriacao,
-    AVG(qtdePontos) AS ValorMedioPositivo,
-    COUNT(qtdePontos) AS TotalRegistros
-FROM transacoes
-GROUP BY DATE(DtCriacao)
-HAVING qtdePontos > 0;
+-- Qual o valor de pontos positivos por dia
+SELECT 
+    count(DISTINCT (date(DtCriacao))) as QtdDiasUnicos,
+    sum(QtdePontos) as TotalPontosPositivos,
+    sum(QtdePontos) / count(DISTINCT (date(DtCriacao))) as ValorMedioPositivo
 
--- select * from transacoes
+FROM transacoes
+where QtdePontos > 0;
