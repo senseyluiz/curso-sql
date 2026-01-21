@@ -1,9 +1,10 @@
 SELECT IdCliente,
-    qtdePontos, DtAtualizacao
-FROM clientes
+    SUM(qtdePontos) AS TotalPontos
+FROM transacoes
 WHERE qtdePontos > 0
+    AND DtCriacao >= '2025-05-01'
+    AND DtCriacao <= '2025-05-31'
 GROUP BY IdCliente
-HAVING DtAtualizacao >= '2025-05-01' AND DtAtualizacao <= '2025-05-31'
-ORDER BY qtdePontos DESC
+ORDER BY TotalPontos DESC
 LIMIT 1;
 
